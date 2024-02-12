@@ -38,4 +38,8 @@ function thirdFn(){
     console.log(a);
 }
 
+setTimeout(() => {
+    console.log('Timeout')
+}, 1000);
+
 firstFn();
