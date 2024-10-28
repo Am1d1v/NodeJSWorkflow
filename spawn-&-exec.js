@@ -1,6 +1,7 @@
-const {exec} = require('child_process');
+const {exec, spawn} = require('child_process');
 
-const childProcess = exec('dir', (err, stdout, stderr) => {
+// Exec
+/* const childProcess = exec('dir', (err, stdout, stderr) => {
     if(err){
         console.log(err.message);
     }
@@ -11,4 +12,20 @@ const childProcess = exec('dir', (err, stdout, stderr) => {
 
 childProcess.on('exit', (code) => {
     console.log(`Code: ${code}`);
-});
+}); */
+
+
+// Spawn
+const childProcess = spawn('ls');
+
+childProcess.stdout.on('data', (data) => {
+    console.log(`Stdout: ${data}`);
+}); 
+
+childProcess.stderr.on('data', (data) => {
+    console.log(`Stderr: ${data}`);
+}); 
+
+childProcess.on("exit", (code) => {
+    console.log(`Code: ${code}`);
+}); 
