@@ -2,6 +2,8 @@
 
 const perfHooks = require('perf_hooks');
 
+test = perfHooks.performance.timerify(test);
+
 const performanceObserver = new perfHooks.PerformanceObserver((items, observer) => {
     console.log(items.getEntries());
 
@@ -12,7 +14,17 @@ const performanceObserver = new perfHooks.PerformanceObserver((items, observer) 
     observer.disconnect();
 });
 
-performanceObserver.observe({entryTypes: ['measure']});
+performanceObserver.observe({entryTypes: ['measure', 'function']});
+
+function test(){
+
+    const arr = [];
+
+    for (let i = 0; i < 1000000; i++){
+        arr.push(i * i);
+    }
+
+}
 
 function slow(){
     // Start performance mark
@@ -32,5 +44,7 @@ function slow(){
 
     
 }
+
 slow();
+test();
 
